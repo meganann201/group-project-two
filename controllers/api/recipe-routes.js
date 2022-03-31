@@ -29,7 +29,13 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const createddata = await Recipe.create({
-            user_id: req.body.user_id
+            id: req.body.id,
+            recipe_name: req.body.recipe_name,
+            description: req.body.description,
+            user_id: req.body.user_id,
+            steps: req.body.steps,
+            ingredients: req.body.ingredients,
+            time: req.body.time
         });
         res.status(200).json(createddata);
     } catch (err) {
