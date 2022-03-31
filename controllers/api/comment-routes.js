@@ -21,10 +21,7 @@ router.get('/recipe/:id', async (req, res) => {
 router.post('/recipe/comments', async (req, res) => {
     try {
         const createdcomment = await Comment.create({
-            id: req.body.id,
             user_id: req.body.user_id,
-            username: req.body.username,
-            comment: req.body.comment,
             recipe_id: req.body.recipe_id
         });
         res.status(200).json(createdcomment);

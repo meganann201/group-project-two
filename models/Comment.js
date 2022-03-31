@@ -18,13 +18,6 @@ Comment.init(
                 key: 'id'
             }
         },
-        username: {
-            type: DataTypes.STRING,
-            references: {
-                model: 'user',
-                key: 'username'
-            }
-        },
         comment: {
             type: DataTypes.TEXT,
             allowNull: false
