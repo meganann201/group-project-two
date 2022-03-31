@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 // et a single recipe
 router.get('/:id', async (req, res) => {
     try {
-        const recipesdata = await Recipe.findByPk(req.params.id);
+        const recipesdata = await Recipe.findByPk(req.params.recipe_id);
         if (!recipesdata) {
             res.status(400).json({ message: 'There is not a recipe with that id.'});
             return;
@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const createddata = await Recipe.create({
-            id: req.body.id,
+            recipe_id: req.body.recipe_id,
             recipe_name: req.body.recipe_name,
             description: req.body.description,
             user_id: req.body.user_id,
@@ -48,7 +48,7 @@ router.delete('/:id', async (req, res) => {
     try {
         const recipesdata = await Recipe.destroy({
             where: {
-                id: req.params.id
+                recipe_id: req.params.recipe_id
             }
         });
         if (!recipesdata) {
