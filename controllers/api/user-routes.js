@@ -11,7 +11,7 @@ const { User } = require('../../models');
 ---------------------------------------------------------------*/
 
 router.get('/', (req, res) => {
-  
+
   User.findAll()
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
@@ -95,4 +95,5 @@ router.get('/', (req, res) => {
   });
 });
  */
+
 module.exports = router;
