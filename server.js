@@ -19,6 +19,7 @@ const sess = {
   })
 };
 
+
 app.use(session(sess));
 
 const hbs = exphbs.create({ });
@@ -32,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // we need to do this for each route until they are all done
-// app.use(require('./controllers/api/user-routes.js'));
+app.use(require('./controllers/api/user-routes.js'));
 
 // when all routes are done we can use this line
 // app.use(require('./controllers/'));

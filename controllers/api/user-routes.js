@@ -1,31 +1,30 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../../config/connection');
-const inputCheck = require('../../utils/inputCheck');
+
+const { User } = require('../../models');
+
+/* const inputCheck = require('../../utils/inputCheck'); */
+
 
 /*---------------------------------------------------------------
 -                         GET ALL USERS PROFILES
 ---------------------------------------------------------------*/
 
-router.get('/users', (req, res) => {
-  const sql = `SELECT * FROM users`;
-  db.query(sql, (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    res.json({
-      message: 'success',
-      data: rows
+router.get('/', (req, res) => {
+  
+  User.findAll()
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
     });
-  });
 });
 
 /*---------------------------------------------------------------
 -                       GET 1 USER PROFILE
 ---------------------------------------------------------------*/
 
-router.get('/users/:id', (req, res) => {
+/* router.get('/users/:id', (req, res) => {
   const sql = `SELECT * FROM users WHERE id = ?`;
   const params = [req.params.id];
   db.query(sql, params, (err, row) => {
@@ -38,13 +37,13 @@ router.get('/users/:id', (req, res) => {
       data: row
     });
   });
-});
+}); */
 
 /*---------------------------------------------------------------
 -                       DELETE 1 USER PROFILE
 ---------------------------------------------------------------*/
 
-router.delete('/users/:id', (req, res) => {
+/* router.delete('/users/:id', (req, res) => {
   const sql = `DELETE FROM users WHERE id = ?`;
   const params = [req.params.id];
   db.query(sql, params, (err, result) => {
@@ -63,59 +62,37 @@ router.delete('/users/:id', (req, res) => {
       });
     }
   });
-});
+}); */
 
 
 /*---------------------------------------------------------------
--                      ADD a USER PROFILE
+-                      CREATE USER PROFILE
 ---------------------------------------------------------------*/
 
-router.post('/user', ({ body }, res) => {
+/* router.post('/users', ({ body }, res) => {
 
-  const errors = inputCheck(body, 'first_name', 'last_name', 'email');
+  const errors = inputCheck(body, 'first_name', 'last_name', 'email', 'user_name', 'secret_key');
   
   if (errors) {
     res.status(400).json({ error: errors });
     return;
   }
   
-    const sql = `INSERT INTO users (first_name, last_name, email) VALUES (?,?,?)`;
-    const params = [body.first_name, body.last_name, body.email];
+  const sql = `INSERT INTO users (first_name, last_name, email, user_name, secret_key) VALUES (?,?,?,?,?)`;
+  const params = [body.first_name, body.last_name, body.email, body.user_name, body.secret_key];
   
-    db.query(sql, params, (err, result) => {
-      if (err) {
-        res.status(400).json({ error: err.message });
-        return;
-      }
-      res.json({
-        message: 'success',
-        data: body
-      });
+  db.query(sql, params, (err, result) => {
+
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+
+    res.json({
+      message: 'success',
+      data: body
     });
   });
-
-router.post('/users', ({ body }, res) => {
-
-  const errors = inputCheck(body, 'first_name', 'last_name', 'email');
-  
-  if (errors) {
-    res.status(400).json({ error: errors });
-    return;
-  }
-  
-    const sql = `INSERT INTO users (first_name, last_name, email) VALUES (?,?,?)`;
-    const params = [body.first_name, body.last_name, body.email];
-  
-    db.query(sql, params, (err, result) => {
-      if (err) {
-        res.status(400).json({ error: err.message });
-        return;
-      }
-      res.json({
-        message: 'success',
-        data: body
-      });
-    });
-  });
-
+});
+ */
 module.exports = router;
