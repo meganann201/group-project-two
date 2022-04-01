@@ -12,7 +12,9 @@ router.get('/', async (req, res) => {
               'user_id',
               'steps',
               'ingredients',
-              'time'
+              'time',
+              'servings',
+              'image'
             ],
             order: [['created_at', 'DESC']],
             include: [
@@ -50,7 +52,9 @@ router.get('/:id', async (req, res) => {
                 'user_id',
                 'steps',
                 'ingredients',
-                'time'
+                'time',
+                'servings',
+                'image'
               ],
               include: [
                 {
@@ -86,7 +90,8 @@ router.post('/', async (req, res) => {
             user_id: req.body.user_id,
             steps: req.body.steps,
             ingredients: req.body.ingredients,
-            time: req.body.time
+            time: req.body.time,
+            servings: req.params.servings
         });
         res.status(200).json(createRecipe);
     } catch (err) {
