@@ -1,0 +1,53 @@
+[
+  {
+    "category_name": "dinner"
+  },
+  {
+    "category_name": "lunch"
+  },
+  {
+    "category_name": "breakfast"
+  },
+  {
+    "category_name": "side dishes"
+  },
+  {
+    "category_name": "healthy"
+  },
+  {
+    "category_name": "italian"
+  },
+  {
+    "category_name": "latin"
+  },
+  {
+    "category_name": "dessert"
+  },
+  {
+    "category_name": "drinks"
+  },
+  {
+    "category_name": "appetizers"
+  },
+  {
+    "category_name": "salads"  
+  },
+  {
+    "category_name": "snacks"  
+  },
+  {
+    "category_name": "dinner"  
+  },
+  {
+    "category_name": "poultry"  
+  },
+  {
+    "category_name": "beef"  
+  },
+  {
+    "category_name": "seafood"  
+  },
+  {
+    "category_name": "vegetarian"  
+  }
+]

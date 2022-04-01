@@ -1,0 +1,20 @@
+[
+    {
+        "recipe_name": "Buratta with Roasted Tomaotes",
+        "description": "These roasted tomatoes are the tastiest summer appetizer you'll ever make and they take just a few minutes to throw together! Loaded with creamy burrata cheese, drizzled with balsamic reduction and garnished with fresh basil - just grab a baguette and a bottle of wine and I'll meet you on the patio!",
+        "user_id": 1,
+        "steps": ["Preheat oven to 400 degrees.", "In a small baking dish combine tomatoes, garlic, oregano, and olive oil along with a pinch of salt. Toss to coat the tomatoes evenly.", "Roast for 30 minutes.", "While the tomatoes are roasting, add balsamic vinegar to a small saucepan over medium-high heat.", "Bring to a simmer, reduce heat and gently simmer for 12-15 minutes, or until it reduces by about half and it easily coats the back of a spoon. Set aside to cool.", "Remove roasted tomatoes from the oven and top with burrata. Drizzle with balsamic reduction and garnish with fresh basil.", "Serve with sliced French baguette and enjoy!"],
+        "ingredients": ["2 pints grape tomatoes", "4 cloves garlic, thinly sliced", "2-3 tablespoons olive oil", "1/2 teaspoon dried oregano", "kosher salt", "8 oz buratta cheese", "1/2 cup balsamic vinegar", "fresh basil for garnish", "sliced French baguette for serving"],
+        "time": 35, 
+        "servings": 6
+    },
+    {
+        "recipe_name": "Pasta With Lemon-Parmigiano Sauce",
+        "description": "This creamy, dreamy lemon-Parmigiano pasta is the ultimate last-minute meal. The sauce is quickly assembled as the pasta boils away and is made up entirely of items you should always have in your pantry: dry pasta, lemon, Parmigiano-Reggiano, and olive oil. The magic ingredient here is the pasta cooking water, which takes the starch from the cooking pasta and uses it to bind the lemon juice, grated cheese, and olive oil to make a perfect pasta sauce.",
+        "user_id": 2,
+        "steps": ["In a medium bowl, vigorously mix the lemon zest and juice, cheese, oil, ½ teaspoon salt, and a few generous grindings of black pepper so the cheese “melts” into the oil and lemon juice. Taste, adding more salt and pepper to your liking; set aside.", "Bring a large pot of generously salted water to a boil (1 tablespoon of salt for every 6 cups of water). Cook the pasta, stirring occasionally, according to the package directions. Drain, reserving 1 cup of the pasta cooking water.", "Return the drained pasta to the hot, empty pot. Pour the lemon-Parmigiano sauce over, tossing with ½ cup of the reserving cooking water to make a creamy sauce that clings to the strands, adding more cooking water as necessary. Add the basil and toss once or twice just to incorporate.", "Divide the pasta among bowls. Garnish with more Parmigiano-Reggiano."],
+        "ingredients": ["2 organic lemons, zested and juiced", "3/4 cup grated Parmigiano-Reggiano, plus more for serving", "1/3 cup extra-virgin olive oil", "Kosher salt and freshly ground pepper", "1 pound spaghetti or angel hair pasta", "20 large fresh basil leaves, thinly sliced"],
+        "time": 25, 
+        "servings": 4
+    }
+]
