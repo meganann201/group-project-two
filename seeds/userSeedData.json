@@ -1,0 +1,65 @@
+[
+    {
+        "user_name": "meganann201",
+        "email": "megan@gmail.com",
+        "first_name": "Megan",
+        "last_name": "C",
+        "secret_key": "1234"
+    },
+    {
+        "user_name": "veronica305",
+        "email": "veronica@gmail.com",
+        "first_name": "Veronica",
+        "last_name": "D",
+        "secret_key": "2345"
+    },
+    {
+        "user_name": "rangerdanger",
+        "email": "ranger@gmail.com",
+        "first_name": "Ranger",
+        "last_name": "Danger",
+        "secret_key": "3456"
+    },
+    {
+        "user_name": "ericr",
+        "email": "eric@gmail.com",
+        "first_name": "Eric",
+        "last_name": "R",
+        "secret_key": "4567"
+    },
+    {
+        "user_name": "foodie305",
+        "email": "foodie@gmail.com",
+        "first_name": "Foodie",
+        "last_name": "G",
+        "secret_key": "5678"
+    },
+    {
+        "user_name": "danny",
+        "email": "danny@gmail.com",
+        "first_name": "Danny",
+        "last_name": "I",
+        "secret_key": "6789"
+    },
+    {
+        "user_name": "roberto",
+        "email": "robert@gmail.com",
+        "first_name": "Robert",
+        "last_name": "R",
+        "secret_key": "7890"
+    },
+    {
+        "user_name": "kennedy111",
+        "email": "ken@gmail.com",
+        "first_name": "Ken",
+        "last_name": "Z",
+        "secret_key": "abcd"
+    },
+    {
+        "user_name": "donutlover",
+        "email": "donuts@gmail.com",
+        "first_name": "Donut",
+        "last_name": "Luver",
+        "secret_key": "lmno"
+    }
+]
