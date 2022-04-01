@@ -1,25 +1,77 @@
 const router = require('express').Router();
-const { Recipe } = require('../../models');
+const { Recipe, User, Comment } = require('../../models');
 
 // get all recipes
 router.get('/', async (req, res) => {
     try {
-        const recipesdata = await Recipe.findAll();
-        res.status(200).json(recipesdata);
+        const recipeData = await Recipe.findAll({
+            attributes: [
+              'id',
+              'recipe_name',
+              'description',
+              'user_id',
+              'steps',
+              'ingredients',
+              'time'
+            ],
+            order: [['created_at', 'DESC']],
+            include: [
+              {
+                model: Comment,
+                attributes: ['id', 'comment', 'recipe_id', 'user_id', 'created_at'],
+                include: {
+                  model: User,
+                  attributes: ['user_name']
+                }
+              },
+              {
+                model: User,
+                attributes: ['user_name']
+              }
+            ]
+          });
+        res.status(200).json(recipeData);
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
-// et a single recipe
+// get a single recipe
 router.get('/:id', async (req, res) => {
     try {
-        const recipesdata = await Recipe.findByPk(req.params.recipe_id);
-        if (!recipesdata) {
+        const recipeData = await Recipe.findOne({
+            where: {
+                id: req.params.id
+            },
+            attributes: [
+                'id',
+                'recipe_name',
+                'description',
+                'user_id',
+                'steps',
+                'ingredients',
+                'time'
+              ],
+              include: [
+                {
+                  model: Comment,
+                  attributes: ['id', 'comment', 'recipe_id', 'user_id', 'created_at'],
+                  include: {
+                    model: User,
+                    attributes: ['user_name']
+                  }
+                },
+                {
+                  model: User,
+                  attributes: ['user_name']
+                }
+              ]
+        });
+        if (!recipeData) {
             res.status(400).json({ message: 'There is not a recipe with that id.'});
             return;
         }
-        res.status(200).json(recipesdata);
+        res.status(200).json(recipeData);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -28,8 +80,7 @@ router.get('/:id', async (req, res) => {
 // create a recipe
 router.post('/', async (req, res) => {
     try {
-        const createddata = await Recipe.create({
-           /*  recipe_id: req.body.recipe_id, */
+        const createRecipe = await Recipe.create({
             recipe_name: req.body.recipe_name,
             description: req.body.description,
             user_id: req.body.user_id,
@@ -37,25 +88,47 @@ router.post('/', async (req, res) => {
             ingredients: req.body.ingredients,
             time: req.body.time
         });
-        res.status(200).json(createddata);
+        res.status(200).json(createRecipe);
     } catch (err) {
         res.status(400).json(err);
     }
 });
 
+//update a recipe
+
+router.put('/:id', async (req, res) => {
+    try {
+        const updateRecipe = await Recipe.update({
+            recipe_name: req.body.recipe_name,
+            description: req.body.description,
+            steps: req.body.steps,
+            ingredients: req.body.ingredients,
+            time: req.body.time
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        });
+        res.status(200).json(updateRecipe);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+})
+
 // delete a recipe
 router.delete('/:id', async (req, res) => {
     try {
-        const recipesdata = await Recipe.destroy({
+        const recipeData = await Recipe.destroy({
             where: {
                 recipe_id: req.params.recipe_id
             }
         });
-        if (!recipesdata) {
+        if (!recipeData) {
             res.status(400).json({ message: 'There is not a recipe with that id.'});
             return;
         }
-        res.status(200).json(recipesdata);
+        res.status(200).json(recipeData);
     } catch (err) {
         res.status(500).json(err);
     }
