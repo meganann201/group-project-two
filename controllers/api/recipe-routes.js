@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const createddata = await Recipe.create({
-            recipe_id: req.body.recipe_id,
+           /*  recipe_id: req.body.recipe_id, */
             recipe_name: req.body.recipe_name,
             description: req.body.description,
             user_id: req.body.user_id,

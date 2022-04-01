@@ -10,14 +10,13 @@ const { User } = require('../../models');
 -                         GET ALL USERS PROFILES
 ---------------------------------------------------------------*/
 
-router.get('/', (req, res) => {
-
-  User.findAll()
-    .then(dbUserData => res.json(dbUserData))
-    .catch(err => {
-      console.log(err);
+router.get('/', async (req, res) => {
+  try {
+      const userdata = await User.findAll();
+      res.status(200).json(userdata);
+  } catch (err) {
       res.status(500).json(err);
-    });
+  }
 });
 
 /*---------------------------------------------------------------
@@ -69,31 +68,23 @@ router.get('/', (req, res) => {
 -                      CREATE USER PROFILE
 ---------------------------------------------------------------*/
 
-/* router.post('/users', ({ body }, res) => {
+router.post('/adduser', async ({ body }, res) => {
 
-  const errors = inputCheck(body, 'first_name', 'last_name', 'email', 'user_name', 'secret_key');
-  
-  if (errors) {
-    res.status(400).json({ error: errors });
-    return;
+  try{
+    const newUser = await User.create({
+      first_name: body.first_name,
+      last_name: body.last_name,
+      email: body.email,
+      user_name: body.user_name,
+      secret_key: body.secret_key
+    })
+    res.status(200).json(newUser);
   }
-  
-  const sql = `INSERT INTO users (first_name, last_name, email, user_name, secret_key) VALUES (?,?,?,?,?)`;
-  const params = [body.first_name, body.last_name, body.email, body.user_name, body.secret_key];
-  
-  db.query(sql, params, (err, result) => {
-
-    if (err) {
-      res.status(400).json({ error: err.message });
-      return;
-    }
-
-    res.json({
-      message: 'success',
-      data: body
-    });
-  });
+  catch(err){
+    console.error(err);
+    res.status(500).json(err);
+  }
 });
- */
+
 
 module.exports = router;

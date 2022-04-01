@@ -7,7 +7,7 @@ const Comment = require("./Comment");
 
 
 Favorite.belongsTo(User, {
-  foreignKey: "user_id",
+  foreignKey: "id",
 });
 
 Favorite.belongsTo(Recipe, {
@@ -41,28 +41,28 @@ Category.belongsToMany(Recipe, {
 });
 
 Recipe.belongsTo(User, {
-  foreignKey: "user_id",
+  foreignKey: "id",
 });
 
 Comment.belongsTo(User, {
-  foreignKey: user_id,
+  foreignKey: "id",
 });
 
 Comment.belongsTo(Recipe, {
-  foreignKey: recipe_id,
+  foreignKey: "recipe_id",
 });
 
 User.hasMany(Recipe, {
-  foreignKey: user_id,
+  foreignKey: "id",
 });
 
 User.hasMany(Comment, {
-  foreignKey: user_id,
+  foreignKey: "id",
 });
 
 Recipe.hasMany(Comment, {
-  foreignKey: recipe_id
-})
+  foreignKey: "recipe_id",
+});
 
 module.exports = {
   Favorite,
