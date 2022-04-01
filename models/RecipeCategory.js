@@ -15,14 +15,14 @@ RecipeCategory.init(
       type: DataTypes.INTEGER,
       references: {
         model: "recipe",
-        key: "id",
+        key: "recipe_id",
       },
     },
     category_id: {
       type: DataTypes.INTEGER,
       references: {
         model: "category",
-        key: "id",
+        key: "category_id",
       },
     },
   },
@@ -30,7 +30,7 @@ RecipeCategory.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: "recipecategory",
+    modelName: "recipe_category",
   }
 );
 

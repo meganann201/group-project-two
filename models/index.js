@@ -2,8 +2,8 @@ const User = require("./User");
 const Recipe = require("./Recipe");
 const Favorite = require("./Favorite");
 const Category = require("./Category");
-const RecipeCategory = require("./RecipeCategory");
 const Comment = require("./Comment");
+const RecipeCategory = require("./RecipeCategory");
 
 
 Favorite.belongsTo(User, {
@@ -22,30 +22,19 @@ Recipe.hasMany(Favorite, {
   foreignKey: "recipe_id",
 });
 
-Recipe.belongsTo(Category, {
-  foreignKey: "category_id",
-});
-
-Category.hasMany(Recipe, {
-  foreignKey: "category_id",
-});
-
-Recipe.belongsToMany(Category, {
-  through: RecipeCategory,
-  foreignKey: "recipe_id",
-});
-
-Category.belongsToMany(Recipe, {
-  through: RecipeCategory,
-  foreignKey: "category_id",
-});
+Recipe.belongsToMany(Category, { through: RecipeCategory });
+Category.belongsToMany(Recipe, { through: RecipeCategory });
+Recipe.hasMany(RecipeCategory);
+RecipeCategory.belongsTo(Recipe);
+Category.hasMany(RecipeCategory);
+RecipeCategory.belongsTo(Category);
 
 Recipe.belongsTo(User, {
-  foreignKey: "id",
+  foreignKey: "user_id",
 });
 
 Comment.belongsTo(User, {
-  foreignKey: "id",
+  foreignKey: "user_id",
 });
 
 Comment.belongsTo(Recipe, {
@@ -53,11 +42,11 @@ Comment.belongsTo(Recipe, {
 });
 
 User.hasMany(Recipe, {
-  foreignKey: "id",
+  foreignKey: "user_id",
 });
 
 User.hasMany(Comment, {
-  foreignKey: "id",
+  foreignKey: "user_id",
 });
 
 Recipe.hasMany(Comment, {
