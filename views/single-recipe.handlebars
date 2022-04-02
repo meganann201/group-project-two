@@ -56,11 +56,19 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8" id="comments">
+            <div class="col-8">
+                <h5>Leave a Comment</h5>
+                <form class="comment-form">
+                <textarea class="form-control" name="comment-body" id="" cols="30" rows="5"></textarea>
+                <button class="btn-primary" type="submit" >Submit</button>
+                </form>
+            </div>
             <h5 class="mt-5">Comments</h5>
             {{#each recipe.Comments}}
             <div class="col-6 shadow p-3 mb-3 bg-white rounded">
                 <h6 class="text-highlight"> {{this.user.user_name}} </h6>
-                <p>{{this.comment}}</p>
+                <p>{{this.comment_text}}</p>
+                <button type="button" onclick="handleDeleteComment({{this.id}})" class="delete-post-btn btn-danger">Delete</button>
             </div>
             {{/each}}
         </div>
@@ -76,3 +84,6 @@
         </div>
     </div>
 </div>
+
+<script src="/javascript/add-comment.js"></script>
+<script src="/javascript/delete-comment.js"></script>

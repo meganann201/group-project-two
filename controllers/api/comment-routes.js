@@ -1,16 +1,12 @@
 const router = require('express').Router();
-const { Comment, Recipe } = require('../../models');
+const { Comment } = require('../../models');
 
 
 // get all comments from a recipe
-router.get('/recipe/:id', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        const commentsdata = await Comment.findAll({
-            where: {
-                recipe_id: req.params.recipe_id
-            }
-        });
-        res.status(200).json(commentsdata);
+        const commentData = await Comment.findAll();
+        res.status(200).json(commentData);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -18,14 +14,14 @@ router.get('/recipe/:id', async (req, res) => {
 
 
 // create a comment 
-router.post('/recipe/comments', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
-        const createdcomment = await Comment.create({
-            user_id: req.body.user_id,
+        const createdComment = await Comment.create({
+            user_id: 1,
             recipe_id: req.body.recipe_id,
-            comment: req.body.comment
+            comment_text: req.body.comment_text
         });
-        res.status(200).json(createdcomment);
+        res.status(200).json(createdComment);
     } catch (err) {
         res.status(400).json(err);
     }
@@ -34,16 +30,16 @@ router.post('/recipe/comments', async (req, res) => {
 // delete a comment
 router.delete('/:id', async (req, res) => {
     try {
-        const commentdata = await Comment.destroy({
+        const commentData = await Comment.destroy({
             where: {
-                comment_id: req.params.comment_id
+                id: req.params.id
             }
         });
-        if (!commentdata) {
+        if (!commentData) {
             res.status(400).json({ message: 'There is not a comment with that id.'});
             return;
         }
-        res.status(200).json(commentdata);
+        res.status(200).json(commentData);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -52,11 +48,11 @@ router.delete('/:id', async (req, res) => {
 // edit an existing comment
 router.patch('/recipe/:id', async (req, res) => {
     try {
-        const updatedcomment = await Comment.update({
+        const updatedComment = await Comment.update({
           comment: req.body.comment  
         });
         Comment.save();
-        res.status(200).json(updatedcomment);
+        res.status(200).json(updatedComment);
     } catch (err) {
         res.status(400).json(err);
     }
