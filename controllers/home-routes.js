@@ -2,10 +2,48 @@ const { Recipe, Comment, User, Category } = require('../models');
 
 const router = require('express').Router();
 
-router.get('/', (req, res) => {  
-    res.render('homepage');
-  });
+router.get('/', async (req, res) => {
+    try {
+      const dbRecipeData = await Recipe.findAll({
+        attributes: [
+          "id",
+          "recipe_name",
+          "image",
+          "user_id"
+        ],
+        include: [
+          {
+            model: User,
+            attributes: ["user_name"]
+          },
+          {
+           model: Category,
+           attributes: ["category_name"] 
+          }
+        ]
+      }) 
 
+      const dbCategoryData = await Category.findAll({
+        attributes: [
+          "category_name"
+        ]
+      })
+
+      const categories = dbCategoryData.map((category) =>
+        category.get({plain: true})
+        );
+      const recipes = dbRecipeData.map((recipe) =>
+        recipe.get({ plain: true})
+        );
+      res.render('homepage', {
+        recipes,
+        categories,
+      });
+      
+    }  catch (err) {
+      res.status(500).json(err);
+    }
+  });
 
 router.get('/login', (req, res) => {  
     res.render('login');

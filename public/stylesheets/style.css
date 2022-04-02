@@ -49,9 +49,10 @@ nav a {
     border-radius: 1rem;
     }
 
+
     a {
         font-family: didot;
-        text-decoration: none;
+        text-decoration: none !important;
         color: #eb4a36;
         font-weight: bold;
         transition: color .1s;
@@ -69,5 +70,12 @@ nav a {
         color: rgba(58, 133, 191, 0.75);
       }
 
-    
+
+.recipecard {
+  transition: 0.5s all ease-in;
+}
+.recipecard:hover {
+  transform: scale(1.1);
+}
+  
      
