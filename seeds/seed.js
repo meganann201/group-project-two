@@ -4,8 +4,6 @@ const { Category, User, Recipe, Comment, RecipeCategory } = require('../models')
 const userSeedData = require('./userSeedData.json');
 const recipeSeedData = require('./recipeSeedData.json');
 const categorySeedData = require('./categorySeedData.json');
-const commentSeedData = require('./commentSeedData.json')
-const recipeCategorySeedData = require('./recipeCategorySeedData.json')
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -15,25 +13,21 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  const recipes = await Recipe.bulkCreate(recipeSeedData, {
-    individualHooks: true,
-    returning: true,
-  });
-
   const categories = await Category.bulkCreate(categorySeedData, {
     individualHooks: true,
-    returning: true,
+    returning: true
   });
 
-  const comments = await Comment.bulkCreate(commentSeedData, {
-    individualHooks: true,
-    returning: true,
-  });
-
-  const recipeCategories = await RecipeCategory.bulkCreate(recipeCategorySeedData, {
-    individualHooks: true,
-    returning: true,
-  });
+  await Promise.all(recipeSeedData.map(async (r) => {
+    const newRecipe = await Recipe.create(r, {
+      individualHooks: true,
+      returning: true,
+      include: [
+        {model: RecipeCategory},
+        {model: Comment}
+      ]
+    })
+  }))
 
   process.exit(0);
 };

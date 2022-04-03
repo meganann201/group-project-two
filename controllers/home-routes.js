@@ -1,4 +1,4 @@
-const { Recipe, Comment, User, Category } = require('../models');
+const { Recipe, Comment, User, Category, RecipeCategory } = require('../models');
 
 const router = require('express').Router();
 
