@@ -34,7 +34,7 @@
 
 <div class="container">
     <div class="row justify-content-center border-bottom shadow p-3 mb-5 bg-white rounded">
-        <div class="col-md-8 font-weight-bold" id="instructions">
+        <div class="col-md-7 font-weight-bold" id="instructions">
             <h5>Instructions</h5>
             <ol>
                 {{#each recipe.steps}}
@@ -42,7 +42,7 @@
                 {{/each}}
             </ol>
         </div>
-        <div class="col-md-2" id="ingredients">
+        <div class="col-md-3" id="ingredients">
             <h5>Ingredients</h5>
             <ul>
                 {{#each recipe.ingredients}}
@@ -59,8 +59,8 @@
             <div class="col-8">
                 <h5>Leave a Comment</h5>
                 <form class="comment-form">
-                <textarea class="form-control" name="comment-body" id="" cols="30" rows="5"></textarea>
-                <button class="btn-primary" type="submit" >Submit</button>
+                    <textarea class="form-control" name="comment-body" id="" cols="30" rows="5"></textarea>
+                    <button class="btn-primary submit-btn" type="submit">Submit</button>
                 </form>
             </div>
             <h5 class="mt-5">Comments</h5>
