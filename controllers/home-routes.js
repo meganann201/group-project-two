@@ -76,7 +76,41 @@ router.get('/favorites', (req, res) => {
 });
 
 router.get('/categories', (req, res) => {  
-  res.render('categories');
+  Category.findAll({
+    attributes: 
+      [ "id",
+        "category_name"
+      ],
+      include: [
+        {
+          model: Recipe,
+          attributes: ["id", "recipe_name", "description", "user_id", "image"],
+          include: {
+            model: User,
+            attributes: ["user_name"],
+          },
+        }
+      ]
+  })
+    .then((dbCategoryData) => {
+      if (!dbCategoryData) {
+        res.status(404).json({ message: "No category found with this name" });
+        return;
+      }
+
+      // serialize the data
+      const category = dbCategoryData.map(category => category.get({ plain: true }));
+       
+      // pass data to template
+      res.render("categories", {
+        category,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+ 
 });
 
 router.get('/category/:category_name', (req, res) => {  
