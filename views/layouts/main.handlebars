@@ -17,24 +17,61 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
 
   <header>
-    <h1>
-      <a href="/">La Cocina</a>
-    </h1>
-    <nav>
-      <a href="/favorites">favorites</a>
-      <a href="/categories">categories</a>
-      {{#if loggedIn}}
-        <a href="/dashboard">my account</a>
-        <button id="logout" class="btn-no-style">logout</button>
-      {{else}}
-        <a href="/login">login</a>
-      {{/if}}
-    </nav>
+   <nav class="navbar">
+  <div class="container">
+
+    <div class="navbar-header">
+      <button class="navbar-toggler" data-toggle="open-navbar1">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+          <div class="logo">
+      
+      <a href="/">La Cocina <i class="fa-solid fa-pepper-hot"></i></a>
+    </div>
+    </div>
+
+    <div class="navbar-menu" id="open-navbar1">
+      <ul class="navbar-nav">
+        
+        <li class="navbar-dropdown">
+          <a class="dropdown-toggler" data-dropdown="my-dropdown-id" style="cursor: pointer;">
+            Categories <i class="fa fa-angle-down"></i>
+          </a>
+          <ul class="dropdown" id="my-dropdown-id">
+            <li><a href="/category/breakfast">Breakfast 🍳</a></li>
+            <li><a href="/category/lunch">Lunch 🌮</a></li>
+            
+            <li><a href="/category/dinner">Dinner 🍝</a></li>
+            
+            <li><a href="/category/appetizers">Appetizers 🧀</a></li>
+            <li><a href="/category/dessert">Desserts 🍰</a></li>
+            <li><a href="/category/drinks">Drinks 🍸</a></li>
+            <li><a href="#">Quick ⏰</a></li>
+            <li><a href="/category/Vegetarian">Vegetarian 🥑</a></li>
+            <li><a href="/categories">View All</a></li>
+          </ul>
+        </li>
+            
+        <li><a href="/favorites">Favorites</a></li>
+        {{#if loggedIn}}
+        <li><a href="/dashboard">My Account</a></li>
+        <li><a href="#">Logout</a></li>
+              {{else}}
+        <li><a href="/login">Login</a></li>
+         {{/if}}
+      </ul>
+    </div>
+  </div>
+</nav>
   </header>
+ 
 
   <body>
     <div class="wrapper">
@@ -45,7 +82,7 @@
     {{#if loggedIn}}
       <script src="/javascript/logout.js"></script>
     {{/if}}
-
+  <script src="/javascript/navbar.js"></script>
   </body>
 
 </html>
