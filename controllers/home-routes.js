@@ -1,4 +1,4 @@
-const { Recipe, Comment, User, Category } = require('../models');
+const { Recipe, Comment, User, Category, RecipeCategory, Favorite } = require('../models');
 
 const router = require('express').Router();
 
@@ -73,7 +73,7 @@ router.get('/recipe/:id', (req, res) => {
     include: [
       {
         model: Comment,
-        attributes: ["id", "comment", "recipe_id", "user_id", "created_at"],
+        attributes: ["id", "comment_text", "recipe_id", "user_id", "created_at"],
         include: {
           model: User,
           attributes: ["user_name"],
@@ -86,6 +86,15 @@ router.get('/recipe/:id', (req, res) => {
       {
         model: Category,
         attributes: ['category_name']
+      },
+      {
+        model: Favorite,
+        attributes: ["id"],
+        where:{
+          // user_id: req.session.user_id || 0
+          user_id: 1
+        },
+        required: false 
       }
     ],
   })
@@ -107,6 +116,125 @@ router.get('/recipe/:id', (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+});
+
+router.get('/favorites', (req, res) => {  
+  Category.findAll({
+    attributes: 
+    [
+      "id"
+    ],
+    include: [
+      {
+        model: Recipe,
+        attributes: ["id", "recipe_name", "description", "user_id", "image"],
+        include: {
+          model: User,
+          attributes: ["user_name"],
+        },
+      }
+    ]
+})
+.then((dbFavoriteData) => {
+  if (!dbFavoriteData) {
+    res.status(404).json({ message: "No favorites found with this name" });
+    return;
+  }
+
+  // serialize the data
+  const favorites = dbFavoriteData.map(favorites => favorites.get({ plain: true }));
+   
+  // pass data to template
+  res.render("favorites", {
+    favorites,
+  });
+})
+.catch((err) => {
+  console.log(err);
+  res.status(500).json(err);
+});
+});
+
+router.get('/categories', (req, res) => {  
+  Category.findAll({
+    attributes: 
+      [ "id",
+        "category_name"
+      ],
+      include: [
+        {
+          model: Recipe,
+          attributes: ["id", "recipe_name", "description", "user_id", "image"],
+          include: {
+            model: User,
+            attributes: ["user_name"],
+          },
+        }
+      ]
+  })
+    .then((dbCategoryData) => {
+      if (!dbCategoryData) {
+        res.status(404).json({ message: "No category found with this name" });
+        return;
+      }
+
+      // serialize the data
+      const category = dbCategoryData.map(category => category.get({ plain: true }));
+       
+      // pass data to template
+      res.render("categories", {
+        category,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+ 
+});
+
+router.get('/category/:category_name', (req, res) => {  
+  Category.findOne({
+    where: {
+      category_name: req.params.category_name,
+    },
+    attributes: 
+      [ "id",
+        "category_name"
+      ],
+      include: [
+        {
+          model: Recipe,
+          attributes: ["id", "recipe_name", "description", "user_id", "image"],
+          include: {
+            model: User,
+            attributes: ["user_name"],
+          },
+        }
+      ]
+  })
+    .then((dbCategoryData) => {
+      if (!dbCategoryData) {
+        res.status(404).json({ message: "No category found with this name" });
+        return;
+      }
+
+      // serialize the data
+      const category = dbCategoryData.get({ plain: true });
+       
+      // pass data to template
+      res.render("single-category", {
+        category,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+router.get('/dashboard', (req, res) => {  
+  res.render('dashboard');
 });
 
 module.exports = router;

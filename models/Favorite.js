@@ -18,15 +18,15 @@ Favorite.init({
     allowNull: false,
     references: {
       model: 'user',
-      key: 'id'
+      key: 'user_id'
     }
   },
-  post_id: {
+  recipe_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
       model: 'recipe',
-      key: 'id'
+      key: 'recipe_id'
     }
 }
 },

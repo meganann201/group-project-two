@@ -1,53 +1,70 @@
 [
   {
-    "category_name": "dinner"
+    "id": 1,
+    "category_name": "Dinner"
   },
   {
-    "category_name": "lunch"
+    "id": 2,
+    "category_name": "Lunch"
   },
   {
-    "category_name": "breakfast"
+    "id": 3,
+    "category_name": "Breakfast"
   },
   {
-    "category_name": "side dishes"
+    "id": 4,
+    "category_name": "Sides"
   },
   {
-    "category_name": "healthy"
+    "id": 5,
+    "category_name": "Healthy"
   },
   {
-    "category_name": "italian"
+    "id": 6,
+    "category_name": "Italian"
   },
   {
-    "category_name": "latin"
+    "id": 7,
+    "category_name": "Mexican"
   },
   {
-    "category_name": "dessert"
+    "id": 8,
+    "category_name": "Dessert"
   },
   {
-    "category_name": "drinks"
+    "id": 9,
+    "category_name": "Drinks"
   },
   {
-    "category_name": "appetizers"
+    "id": 10,
+    "category_name": "Appetizers"
   },
   {
-    "category_name": "salads"  
+    "id": 11,
+    "category_name": "Salads"  
   },
   {
-    "category_name": "snacks"  
+    "id": 12,
+    "category_name": "Snacks"  
   },
   {
-    "category_name": "dinner"  
+    "id": 14,
+    "category_name": "Poultry"  
   },
   {
-    "category_name": "poultry"  
+    "id": 15,
+    "category_name": "Beef"  
   },
   {
-    "category_name": "beef"  
+    "id": 16,
+    "category_name": "Seafood"  
   },
   {
-    "category_name": "seafood"  
+    "id": 17,
+    "category_name": "Vegetarian"  
   },
   {
-    "category_name": "vegetarian"  
+    "id": 18,
+    "category_name": "Quick"
   }
 ]

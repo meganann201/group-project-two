@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const { Favorite, RecipeCategory, User } = require("../../models");
-const { route } = require("../home-routes");
+const { Favorite, Recipe, User } = require("../../models");
 
 router.get("/", (req, res) => {
   Favorite.findAll({
@@ -10,9 +9,7 @@ router.get("/", (req, res) => {
     include: [
       {
         model: Recipe,
-        attributes: ["id", "recipe_name"],
-        through: RecipeCategory,
-        as: "recipes",
+        attributes: ["id", "recipe_name"]
       },
       {
         model: User,
@@ -27,29 +24,30 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post((req, res) => {
+router.post("/recipe", (req, res) => {
   Favorite.create({
     recipe_id: req.body.recipe_id,
-    user_id: req.session.user_id
+    user_id: 1
   })
-  .then(res.status(200))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+  .then((favorite) => res.status(200).json(favorite))
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
-router.delete((req, res) => {
+router.delete('/', (req, res) => {
   Favorite.destroy({
     where: {
-      id: req.params.id
+      recipe_id: req.body.recipe_id,
+      // user_id: req.session.user_id,
+      user_id: 1
     }
   })
-  .then(res.status(200))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+  .then((data) => res.status(200).send())
+  .catch((err) => {
+    res.status(500).json(err);
+  });
 });
 
 

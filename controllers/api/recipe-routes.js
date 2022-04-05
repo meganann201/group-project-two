@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Recipe, User, Comment } = require('../../models');
+const { Recipe, User, Comment, RecipeCategory, Category } = require('../../models');
 
 // get all recipes
 router.get('/', async (req, res) => {
@@ -68,7 +68,11 @@ router.get('/:id', async (req, res) => {
                 {
                   model: User,
                   attributes: ['user_name']
-                }
+                },
+                {
+                    model: Category,
+                    attributes: ['category_name']
+                  }
               ]
         });
         if (!recipeData) {
