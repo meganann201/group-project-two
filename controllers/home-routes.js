@@ -1,4 +1,4 @@
-const { Recipe, Comment, User, Category, RecipeCategory, Favorite } = require('../models');
+const { Recipe, Comment, User, Category, Favorite } = require('../models');
 
 const router = require('express').Router();
 
@@ -38,6 +38,7 @@ router.get('/', async (req, res) => {
       res.render('homepage', {
         recipes,
         categories,
+        loggedIn: req.session.loggedIn
       });
       
     }  catch (err) {
@@ -45,13 +46,15 @@ router.get('/', async (req, res) => {
     }
   });
 
-router.get('/login', (req, res) => {  
+  router.get('/login', (req, res) => {
+    if (req.session.loggedIn) {
+      res.redirect('/');
+      return;
+    }
+  
     res.render('login');
   });
 
-//router.get('/recipe', (req,res) => {
-  //  res.render('single-recipe');
-// })
 
 router.get('/recipe/:id', (req, res) => {
   Recipe.findOne({
@@ -110,6 +113,7 @@ router.get('/recipe/:id', (req, res) => {
       // pass data to template
       res.render("single-recipe", {
         recipe,
+        loggedIn: req.session.loggedIn
       });
     })
     .catch((err) => {
@@ -233,8 +237,5 @@ router.get('/category/:category_name', (req, res) => {
     });
 });
 
-router.get('/dashboard', (req, res) => {  
-  res.render('dashboard');
-});
 
 module.exports = router;

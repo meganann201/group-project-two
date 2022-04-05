@@ -57,6 +57,7 @@
     </div>
 </div>
 
+{{#if loggedIn}}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8" id="comments">
@@ -68,6 +69,7 @@
                 </form>
             </div>
             <h5 class="mt-5">Comments</h5>
+             {{/if}}
             {{#each recipe.Comments}}
             <div class="col-6 shadow p-3 mb-3 bg-white rounded">
                 <h6 class="text-highlight"> {{this.user.user_name}} </h6>
@@ -91,5 +93,7 @@
 
 <script src="/javascript/add-favorite.js"></script>
 <script src="/javascript/delete-favorite.js"></script>
+{{#if loggedIn}}
 <script src="/javascript/add-comment.js"></script>
+{{/if}}
 <script src="/javascript/delete-comment.js"></script>
