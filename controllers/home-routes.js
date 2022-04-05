@@ -94,8 +94,7 @@ router.get('/recipe/:id', (req, res) => {
         model: Favorite,
         attributes: ["id"],
         where:{
-          // user_id: req.session.user_id || 0
-          user_id: 1
+          user_id: req.session.user_id || 0
         },
         required: false 
       }
@@ -123,19 +122,18 @@ router.get('/recipe/:id', (req, res) => {
 });
 
 router.get('/favorites', (req, res) => {  
-  Category.findAll({
+  Favorite.findAll({
     attributes: 
     [
       "id"
     ],
+    where: {
+      user_id: req.session.user_id
+    },
     include: [
       {
         model: Recipe,
         attributes: ["id", "recipe_name", "description", "user_id", "image"],
-        include: {
-          model: User,
-          attributes: ["user_name"],
-        },
       }
     ]
 })
@@ -147,10 +145,11 @@ router.get('/favorites', (req, res) => {
 
   // serialize the data
   const favorites = dbFavoriteData.map(favorites => favorites.get({ plain: true }));
-   
+
   // pass data to template
   res.render("favorites", {
     favorites,
+    loggedIn: req.session.loggedIn
   });
 })
 .catch((err) => {

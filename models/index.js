@@ -5,7 +5,6 @@ const Category = require("./Category");
 const Comment = require("./Comment");
 const RecipeCategory = require("./RecipeCategory");
 
-Recipe.belongsToMany(User, { through: Favorite });
 User.belongsToMany(Recipe, { through: Favorite });
 Recipe.hasMany(Favorite);
 Favorite.belongsTo(Recipe);

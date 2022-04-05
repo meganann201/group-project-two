@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
     include: [
       {
         model: Recipe,
-        attributes: ["id", "recipe_name"]
+        attributes: ["id", "recipe_name", "description", "image"]
       },
       {
         model: User,
@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
 router.post("/recipe", (req, res) => {
   Favorite.create({
     recipe_id: req.body.recipe_id,
-    user_id: 1
+    user_id: req.session.user_id,
   })
   .then((favorite) => res.status(200).json(favorite))
   .catch((err) => {
@@ -40,8 +40,7 @@ router.delete('/', (req, res) => {
   Favorite.destroy({
     where: {
       recipe_id: req.body.recipe_id,
-      // user_id: req.session.user_id,
-      user_id: 1
+      user_id: req.session.user_id,
     }
   })
   .then((data) => res.status(200).send())
@@ -49,9 +48,6 @@ router.delete('/', (req, res) => {
     res.status(500).json(err);
   });
 });
-
-
-
 
 
 module.exports = router;
