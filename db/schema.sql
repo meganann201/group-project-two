@@ -2,11 +2,11 @@ DROP DATABASE IF EXISTS cocina_db;
 CREATE DATABASE cocina_db;
 USE cocina_db;
 
-CREATE TABLE users (
+/* CREATE TABLE users (
   id INTEGER AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
   email VARCHAR(30) NOT NULL,
   user_name VARCHAR(30) NOT NULL,
   secret_key VARCHAR(30) NOT NULL
-);
+); */

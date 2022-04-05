@@ -35,7 +35,7 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-      len: [30]
+      len: [4]
       }
     }
   },
@@ -44,9 +44,9 @@ User.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'user'
+    modelName: "user"
   }
 );
 
 
-module.exports = { User };
+module.exports =  User;
