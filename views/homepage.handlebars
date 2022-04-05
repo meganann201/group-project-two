@@ -4,7 +4,6 @@
     background-image: url('https://cdn.vox-cdn.com/thumbor/8XbAb6nXxoye4gpc_Wwti0IX3bk=/0x407:4751x2783/fit-in/1200x600/cdn.vox-cdn.com/uploads/chorus_asset/file/23172798/Table_Overview_World_Red_Eye.jpg');
     background-size: cover;">
         <h1 class="display-5 fw-bold text-white">Choose from thousands of recipes</h1>
-        <p class="col-md-8 fs-4 text-white">Appropriately integrate technically sound value with scalable infomediaries negotiate sustainable strategic theme areas.</p>
         <a href="http://localhost:3001/login" class="btn btn-primary btn-lg text-white">Sign up today</button></a>
         {{!-- <img class="bg-img" src="https://renzifoodservice.com/sites/default/files/styles/768x288/public/millennials_banner.png?itok=YkdTpY4D" alt="" > --}}
     </div>
@@ -16,7 +15,9 @@
         <h2 class="w-100">Select A Category</h2>
             <ul class="list-group d-grid gap-3">
                 {{#each categories as |category|}}
+                <a href="http://localhost:3001/category/{{category_name}}">
                 <div class="p-2 bg-light border recipecard">{{category.category_name}}</div>
+                </a>
                 {{/each}}
             </ul>
     </div>
