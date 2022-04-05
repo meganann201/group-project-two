@@ -24,8 +24,12 @@
                     <p>25 recipes</p>
                 </div>
                 <div class="col">
-                    <button class="btn-primary">Add To Favorites</button>
-                    <i class="fa-solid fa-plus"></i>
+                    <div id="add-favorite-btn" {{#if recipe.favorites}}class="d-none"{{/if}}>
+                        <button class="btn-primary"  onclick="handleAddFavorite({{recipe.id}})">Add To Favorites</button>
+                    </div>
+                    <div id="remove-favorite-btn" {{#unless recipe.favorites}}class="d-none"{{/unless}}>
+                        <button class="btn-primary" onclick="handleRemoveFavorite({{recipe.id}})">Remove From Favorites</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,5 +89,7 @@
     </div>
 </div>
 
+<script src="/javascript/add-favorite.js"></script>
+<script src="/javascript/delete-favorite.js"></script>
 <script src="/javascript/add-comment.js"></script>
 <script src="/javascript/delete-comment.js"></script>

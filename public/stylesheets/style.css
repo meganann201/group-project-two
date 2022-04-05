@@ -41,6 +41,7 @@ body {
   background: transparent;
   transition: all 0.3s ease 0s;
   margin-top: 6px;
+  padding: 4px;
 }
 
 .btn-primary:hover {
