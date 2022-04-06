@@ -333,6 +333,60 @@
         {
             "category_id": 18
         }]
+    },
+    {
+        "recipe_name": "Hummus Avocado Wrap",
+        "description": "Avocado toast may be the latest food trend, but vegans and Californians who love avocado have been adding avocado to sandwiches, toasts, and wraps for decades. So if you're looking for the perfect way to make an avocado wrap vegan, or use up some leftover guacamole, this wrap sandwich may be one delicious way to do so. Try this vegan California-style avocado hummus wrap recipe. It's loaded with hummus, avocado, alfalfa sprouts, tomatoes, and cucumbers.",
+        "user_id": 4,
+        "steps": ["Gather the ingredients.", "Bring flour tortilla to room temperature.", "Spread hummus down the middle of the flour tortilla.", "Arrange avocado, alfalfa sprouts, tomato, and cucumber (if using) on top of hummus and fold up into a sandwich wrap."],
+        "ingredients": ["1 flour tortilla", "3 tablespoons hummus", "1/4 avocado, thinly sliced", "1/3 cup alfafa sprouts", "2 to 4 slices tomato", "4 slices cucumber, optional"],
+        "time": 5,
+        "servings": 1,
+        "image": "https://www.thespruceeats.com/thmb/ajfcfXJ8KXb8XrT7WLHfq_4oKW0=/2668x2001/smart/filters:no_upscale()/vegan-avocado-wrap-sandwich-with-hummus-3377621-hero-01-6945a100b88d4271b0debb161dc7350a.jpg",
+        "recipe_categories": [{
+            "category_id": 5
+        },{
+            "category_id": 2
+        },
+        {
+            "category_id": 17
+        }]
+    },
+    {
+        "recipe_name": "Cacio e Pepe",
+        "description": "Literally “cheese and pepper,” this minimalist cacio e pepe recipe is like a stripped-down mac and cheese.",
+        "user_id": 6,
+        "steps": ["Bring 3 quarts water to a boil in a 5-qt. pot. Season with salt; add pasta and cook, stirring occasionally, until about 2 minutes before tender. Drain, reserving 3/4 cup pasta cooking water.", "Meanwhile, melt 2 Tbsp. butter in a Dutch oven or other large pot or skillet over medium heat. Add pepper and cook, swirling pan, until toasted, about 1 minute.", "Add ½ cup reserved pasta water to skillet and bring to a simmer. Add pasta and remaining butter. Reduce heat to low and add Grana Padano, stirring and tossing with tongs until melted. Remove pan from heat; add Pecorino, stirring and tossing until cheese melts, sauce coats the pasta, and pasta is al dente. (Add more pasta water if sauce seems dry.) Transfer pasta to warm bowls and serve."],
+        "ingredients": ["Salt", "6 ounces pasta", "3 tablespoons unslated butter, cubed", "1 teaspoon freshly cracked black pepper", "3/4 cup finely grated Grana Padano or Parmesan", "1/3 cup finely grated Pecorino"],
+        "time": 30,
+        "servings": 2,
+        "image": "https://cdn.apartmenttherapy.info/image/upload/v1579294251/k/Photo/Recipes/2020-02-How-To-Cacio-e-Pepe/HT-Cacio-e-Pepe_027.jpg",
+        "recipe_categories": [{
+            "category_id": 1
+        },{
+            "category_id": 6
+        },
+        {
+            "category_id": 18
+        }]
+    },
+    {
+        "recipe_name": "French Bread Pizza",
+        "description": "French bread pizza brings many of us back to our childhood, making frozen versions on our own in a toaster oven. Return to those simpler days with this delicious, easy, super crunchy version. The secret to making the best French bread pizza is toasting the bread before adding your toppings—this ensures no more soggy bread.",
+        "user_id": 1,
+        "steps": ["Gather the ingredients. Preheat oven to 425.", "Stir the garlic, melted butter, olive oil, and half of the chopped parsley together in a small bowl.", "Lay the pieces of bread out on a sheet tray. Top the French bread pieces with the butter mixture, completely coating the top of each piece.", "Bake the bread in the preheated oven on the center rack for about 3 to 5 minutes or until the tops are golden brown and crisp.", "Remove the bread from the oven, and top each one with your desired amount of sauce.", "Top with an equal amount of mozzarella and parmesan cheese and pepperoni. Return to the oven and bake for about 5 to 7 minutes or until the cheese is melted and slightly browned.", "Remove from the oven and top with remaining chopped parsley.", "Serve immediately with extra Parmesan cheese"],
+        "ingredients": ["2 cloves garlic", "1 tablespoon unsalted butter, melted", "2 tablespoons olive oil", "1 tablespoon chopped fresh parsley, divided", "1/2 loaf French bread, sliced in half lengthwise", "1 cup pizza sauce", "1 cup shredded mozzarella cheese", "2 teaspoons grated Parmesan cheese", "12 slices pepperoni"],
+        "time": 20,
+        "servings": 4,
+        "image": "https://www.thelittleepicurean.com/wp-content/uploads/2017/07/french-bread-pizza-1.jpg",
+        "recipe_categories": [{
+            "category_id": 2
+        },{
+            "category_id": 6
+        },
+        {
+            "category_id": 18
+        }]
     }
 
 ]

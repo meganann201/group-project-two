@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: Lato, Helvetica, Arial, sans-serif;
+  font-family: sans-serif;
 }
 
 .thumbnail-image {
@@ -25,23 +25,35 @@ body {
   -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 }
 
+textarea {
+  height: 1em;
+  width: 50%;
+  padding: 3px;
+  transition: all 0.5s ease;
+}
+
+textarea:focus {
+  height: 6em;
+}
+
 .submit-btn {
   float: right;
   width: 125px;
 }
 
 .btn-primary {
-  font-family: sans-serif;
+  font-family: Lato, Helvetica, Arial, sans-serif;
   font-size: 13px;
   color: rgba(58, 133, 191, 0.75);
   letter-spacing: 1px;
-  line-height: 15px;
+  line-height: 20px;
   border: 2px solid rgba(58, 133, 191, 0.75);
-  border-radius: 40px;
+  border-radius: 10px;
   background: transparent;
   transition: all 0.3s ease 0s;
   margin-top: 6px;
   padding: 4px;
+  width: 100;
 }
 
 .btn-primary:hover {
@@ -66,15 +78,18 @@ body {
   letter-spacing: 1px;
   line-height: 15px;
   border: 2px solid rgba(251, 80, 80, 0.485);
-  border-radius: 40px;
+  border-radius: 10px;
   background: transparent;
   transition: all 0.3s ease 0s;
   margin-top: 6px;
+  padding: 4px;
 }
 
 a {
   color: #0d1a26;
   text-decoration: none;
+  cursor: pointer;
+  font-family: sans-serif;
 }
 
 .logo {
@@ -314,7 +329,7 @@ a {
     font-size: 1.05rem;
   }
 }
-}
+
   .form-rounded {
     border-radius: 1rem;
     }
@@ -342,7 +357,7 @@ a {
 
 
 .recipecard {
-  transition: 0.5s all ease-in;
+  width: 220px;
 }
 .recipecard:hover {
   transform: scale(1.1);
