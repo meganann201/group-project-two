@@ -2,9 +2,11 @@ const { Recipe, Comment, User, Category, Favorite } = require('../models');
 
 const router = require('express').Router();
 
-router.get('/', (req, res) => {
-  res.render('dashboard', { loggedIn: true });
-});
+
+
+/*---------------------------------------------------------------
+-                         RENDER HOMEPAGE
+---------------------------------------------------------------*/
 
 router.get('/', async (req, res) => {
     try {
@@ -50,15 +52,49 @@ router.get('/', async (req, res) => {
     }
   });
 
-  router.get('/login', (req, res) => {
-    if (req.session.loggedIn) {
-      res.redirect('/');
-      return;
-    }
-  
-    res.render('login');
-  });
+/*---------------------------------------------------------------
+-                         RENDER LOGIN
+---------------------------------------------------------------*/
 
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('login');
+});
+
+/*---------------------------------------------------------------
+-                         RENDER DASHBOARD
+---------------------------------------------------------------*/
+
+router.get('/dashboard', (req, res) => {
+  Recipe.findAll({
+    where: {
+      // use the ID from the session
+      user_id: req.session.user_id
+    },
+    include: [
+      {
+        model: User,
+        attributes: ['user_name'],
+      }
+    ]
+  })
+    .then(dbRecipeData => {
+      // serialize data before passing to template
+      const recipes = dbRecipeData.map((recipe) => recipe.get({ plain: true }));
+      res.render('dashboard', { recipes });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+/*---------------------------------------------------------------
+-                         RENDER 1 RECIPE
+---------------------------------------------------------------*/
 
 router.get('/recipe/:id', (req, res) => {
   Recipe.findOne({
@@ -125,6 +161,10 @@ router.get('/recipe/:id', (req, res) => {
     });
 });
 
+/*---------------------------------------------------------------
+-                         RENDER FAVORITES
+---------------------------------------------------------------*/
+
 router.get('/favorites', (req, res) => {  
   Favorite.findAll({
     attributes: 
@@ -161,6 +201,10 @@ router.get('/favorites', (req, res) => {
   res.status(500).json(err);
 });
 });
+
+/*---------------------------------------------------------------
+-                         RENDER CATEGORIES
+---------------------------------------------------------------*/
 
 router.get('/categories', (req, res) => {  
   Category.findAll({
@@ -199,6 +243,10 @@ router.get('/categories', (req, res) => {
     });
  
 });
+
+/*---------------------------------------------------------------
+-                     RENDER 1 CATEGORY (name)
+---------------------------------------------------------------*/
 
 router.get('/category/:category_name', (req, res) => {  
   Category.findOne({

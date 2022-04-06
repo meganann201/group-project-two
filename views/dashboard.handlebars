@@ -15,3 +15,59 @@
   </form>
 
 </section>
+
+
+<section>
+  <h2>Your Recipes</h2>
+  <ol>
+    {{#each recipes as |recipe|}}
+    <div class="container">
+    <div class="row">
+        <div class="col-6">
+            <img class="img-fluid rounded mt-1 mb-1 shadow p-3 mb-1 bg-white rounded" src="{{recipe.image}}" alt="">
+        </div>
+        <div class="col-6 align-self-center shadow p-3 mb-5 bg-white rounded mt-5">
+            <h2 class="recipe-title">{{recipe.recipe_name}}</h2>
+            <p class="recipe-description">
+                {{recipe.description}}
+            </p>
+            <div class="row border-bottom d-flex justify-content-center">
+                <div class="col-4">
+                    <p><i class="fa-solid fa-clock-rotate-left"></i> Total Time</p>
+                    <p>{{recipe.time}} minutes</p>
+                </div>
+                <div class="col-4">
+                    <p> <i class="fa-solid fa-users"></i> Yield</p>
+                    <p>Serves {{recipe.servings}} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {{/each}}
+  </ol>
+</section>
+
+
+
+
+
+
+{{!-- <section>
+  <h2>Your Recipes</h2>
+  <ol>
+    {{#each recipes as |recipe|}}
+    <li>
+      {{ recipe.recipe_name }} <br>
+      {{ recipe.description }} <br>
+      {{ recipe.user_id }} <br>
+      {{ recipe.steps }} <br>
+      {{ recipe.ingredients }} <br>
+      {{ recipe.time }} <br>
+      {{ recipe.image }} <br>
+      <a href="/dashboard/edit{{recipe.id}}" class="edit-link">Edit recipe</a>
+    </li>
+    {{/each}}
+  </ol>
+</section> --}}
+

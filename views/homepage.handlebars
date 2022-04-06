@@ -13,12 +13,13 @@
     
     <div class="col-md-2 p-3 sidebar m-5">
         <h2 class="w-100">Select A Category</h2>
-            <ul class="list-group d-grid gap-3">
-                {{#each categories as |category|}}
-                <a href="http://localhost:3001/category/{{category_name}}">
+
+        <ul class="list-group d-grid gap-3">
+            {{#each categories as |category|}}
+            <a href="http://localhost:3001/category/{{category_name}}">
                 <div class="p-2 bg-light border recipecard">{{category.category_name}}</div>
-                </a>
-                {{/each}}
+            </a>
+            {{/each}}
             </ul>
     </div>
 
