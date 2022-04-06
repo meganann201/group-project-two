@@ -1,19 +1,60 @@
-const { Recipe, Comment, User, Category, RecipeCategory } = require('../models');
+const { Recipe, Comment, User, Category, Favorite } = require('../models');
 
 const router = require('express').Router();
 
-router.get('/', (req, res) => {  
-    res.render('homepage');
+router.get('/', async (req, res) => {
+    try {
+      const dbRecipeData = await Recipe.findAll({
+        attributes: [
+          "id",
+          "recipe_name",
+          "image",
+          "user_id"
+        ],
+        include: [
+          {
+            model: User,
+            attributes: ["user_name"]
+          },
+          {
+           model: Category,
+           attributes: ["category_name"] 
+          }
+        ]
+      }) 
+
+      const dbCategoryData = await Category.findAll({
+        attributes: [
+          "category_name"
+        ]
+      })
+
+      const categories = dbCategoryData.map((category) =>
+        category.get({plain: true})
+        );
+      const recipes = dbRecipeData.map((recipe) =>
+        recipe.get({ plain: true})
+        );
+      res.render('homepage', {
+        recipes,
+        categories,
+        loggedIn: req.session.loggedIn
+      });
+      
+    }  catch (err) {
+      res.status(500).json(err);
+    }
   });
 
-
-router.get('/login', (req, res) => {  
+  router.get('/login', (req, res) => {
+    if (req.session.loggedIn) {
+      res.redirect('/');
+      return;
+    }
+  
     res.render('login');
   });
 
-//router.get('/recipe', (req,res) => {
-  //  res.render('single-recipe');
-// })
 
 router.get('/recipe/:id', (req, res) => {
   Recipe.findOne({
@@ -48,6 +89,14 @@ router.get('/recipe/:id', (req, res) => {
       {
         model: Category,
         attributes: ['category_name']
+      },
+      {
+        model: Favorite,
+        attributes: ["id"],
+        where:{
+          user_id: req.session.user_id || 0
+        },
+        required: false 
       }
     ],
   })
@@ -63,6 +112,7 @@ router.get('/recipe/:id', (req, res) => {
       // pass data to template
       res.render("single-recipe", {
         recipe,
+        loggedIn: req.session.loggedIn
       });
     })
     .catch((err) => {
@@ -72,11 +122,78 @@ router.get('/recipe/:id', (req, res) => {
 });
 
 router.get('/favorites', (req, res) => {  
-  res.render('favorites');
+  Favorite.findAll({
+    attributes: 
+    [
+      "id"
+    ],
+    where: {
+      user_id: req.session.user_id
+    },
+    include: [
+      {
+        model: Recipe,
+        attributes: ["id", "recipe_name", "description", "user_id", "image"],
+      }
+    ]
+})
+.then((dbFavoriteData) => {
+  if (!dbFavoriteData) {
+    res.status(404).json({ message: "No favorites found with this name" });
+    return;
+  }
+
+  // serialize the data
+  const favorites = dbFavoriteData.map(favorites => favorites.get({ plain: true }));
+
+  // pass data to template
+  res.render("favorites", {
+    favorites,
+    loggedIn: req.session.loggedIn
+  });
+})
+.catch((err) => {
+  console.log(err);
+  res.status(500).json(err);
+});
 });
 
 router.get('/categories', (req, res) => {  
-  res.render('categories');
+  Category.findAll({
+    attributes: 
+      [ "id",
+        "category_name"
+      ],
+      include: [
+        {
+          model: Recipe,
+          attributes: ["id", "recipe_name", "description", "user_id", "image"],
+          include: {
+            model: User,
+            attributes: ["user_name"],
+          },
+        }
+      ]
+  })
+    .then((dbCategoryData) => {
+      if (!dbCategoryData) {
+        res.status(404).json({ message: "No category found with this name" });
+        return;
+      }
+
+      // serialize the data
+      const category = dbCategoryData.map(category => category.get({ plain: true }));
+       
+      // pass data to template
+      res.render("categories", {
+        category,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+ 
 });
 
 router.get('/category/:category_name', (req, res) => {  
@@ -119,8 +236,5 @@ router.get('/category/:category_name', (req, res) => {
     });
 });
 
-router.get('/dashboard', (req, res) => {  
-  res.render('dashboard');
-});
 
 module.exports = router;

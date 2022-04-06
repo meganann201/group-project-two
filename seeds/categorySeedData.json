@@ -25,7 +25,7 @@
   },
   {
     "id": 7,
-    "category_name": "Latin American"
+    "category_name": "Mexican"
   },
   {
     "id": 8,
@@ -48,10 +48,6 @@
     "category_name": "Snacks"  
   },
   {
-    "id": 13,
-    "category_name": "Vegan"  
-  },
-  {
     "id": 14,
     "category_name": "Poultry"  
   },
@@ -66,5 +62,9 @@
   {
     "id": 17,
     "category_name": "Vegetarian"  
+  },
+  {
+    "id": 18,
+    "category_name": "Quick"
   }
 ]

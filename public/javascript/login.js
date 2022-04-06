@@ -1,24 +1,24 @@
 async function signupFormHandler(event) {
     event.preventDefault();
   
-    const username = document.querySelector('#username-signup').value.trim();
+    const user_name = document.querySelector('#username-signup').value.trim();
     const email = document.querySelector('#email-signup').value.trim();
-    const password = document.querySelector('#password-signup').value.trim();
+    const secret_key = document.querySelector('#password-signup').value.trim();
   
-    if (username && email && password) {
+    if (user_name && email && secret_key) {
       const response = await fetch('/api/users', {
         method: 'post',
         body: JSON.stringify({
-          username,
+          user_name,
           email,
-          password
+          secret_key
         }),
         headers: { 'Content-Type': 'application/json' }
       });
   
       // check the response status
       if (response.ok) {
-        console.log('success');
+        document.location.replace('/');
       } else {
         alert(response.statusText);
       }
@@ -31,20 +31,20 @@ async function signupFormHandler(event) {
     event.preventDefault();
   
     const email = document.querySelector('#email-login').value.trim();
-    const password = document.querySelector('#password-login').value.trim();
+    const secret_key = document.querySelector('#password-login').value.trim();
   
-    if (email && password) {
+    if (email && secret_key) {
       const response = await fetch('/api/users/login', {
         method: 'post',
         body: JSON.stringify({
           email,
-          password
+          secret_key
         }),
         headers: { 'Content-Type': 'application/json' }
       });
   
       if (response.ok) {
-        document.location.replace('/dashboard');
+        document.location.replace('/');
       } else {
         alert(response.statusText);
       }
