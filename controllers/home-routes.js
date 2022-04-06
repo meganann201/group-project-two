@@ -2,6 +2,10 @@ const { Recipe, Comment, User, Category, Favorite } = require('../models');
 
 const router = require('express').Router();
 
+router.get('/', (req, res) => {
+  res.render('dashboard', { loggedIn: true });
+});
+
 router.get('/', async (req, res) => {
     try {
       const dbRecipeData = await Recipe.findAll({
