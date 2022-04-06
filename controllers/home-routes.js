@@ -112,7 +112,8 @@ router.get('/recipe/:id', (req, res) => {
       // pass data to template
       res.render("single-recipe", {
         recipe,
-        loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn,
+        current_user_id: req.session.user_id
       });
     })
     .catch((err) => {
@@ -196,44 +197,49 @@ router.get('/categories', (req, res) => {
  
 });
 
-router.get('/category/:category_name', (req, res) => {  
-  Category.findOne({
-    where: {
-      category_name: req.params.category_name,
-    },
-    attributes: 
-      [ "id",
-        "category_name"
-      ],
-      include: [
-        {
-          model: Recipe,
-          attributes: ["id", "recipe_name", "description", "user_id", "image"],
-          include: {
-            model: User,
-            attributes: ["user_name"],
-          },
-        }
-      ]
-  })
-    .then((dbCategoryData) => {
-      if (!dbCategoryData) {
-        res.status(404).json({ message: "No category found with this name" });
-        return;
-      }
-
-      // serialize the data
-      const category = dbCategoryData.get({ plain: true });
-       
-      // pass data to template
-      res.render("single-category", {
-        category,
-      });
+router.get('/category/:category_name', async (req, res) => {  
+  try {
+    const dbCategoryData = await Category.findOne({
+      where: {
+        category_name: req.params.category_name,
+      },
+      attributes: 
+        [ "id",
+          "category_name"
+        ],
+        include: [
+          {
+            model: Recipe,
+            attributes: ["id", "recipe_name", "description", "user_id", "image"],
+            include: {
+              model: User,
+              attributes: ["user_name"],
+            },
+          }
+        ]
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
+
+    const dbAllCategoryData = await Category.findAll({
+      attributes: [
+        "category_name"
+      ]
+    })
+
+    const category = dbCategoryData.get({plain: true})
+
+    const categories = dbAllCategoryData.map((allCategories) =>
+      allCategories.get({plain: true})
+    );
+
+    res.render('single-category', {
+      category,
+      categories,
+      loggedIn: req.session.loggedIn
     });
+  } catch(err) {
+    debugger;
+    res.status(500).json(err);
+  }
 });
 
 
