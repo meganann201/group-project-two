@@ -1,7 +1,10 @@
 const router = require('express').Router();
 const { Recipe, User, Comment, RecipeCategory, Category } = require('../../models');
 
-// get all recipes
+/*---------------------------------------------------------------
+-                         GET ALL RECIPES
+---------------------------------------------------------------*/
+
 router.get('/', async (req, res) => {
     try {
         const recipeData = await Recipe.findAll({
@@ -38,7 +41,11 @@ router.get('/', async (req, res) => {
     }
 });
 
-// get a single recipe
+
+/*---------------------------------------------------------------
+-                         GET 1 RECIPE
+---------------------------------------------------------------*/
+
 router.get('/:id', async (req, res) => {
     try {
         const recipeData = await Recipe.findOne({
@@ -85,18 +92,21 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// create a recipe
+/*---------------------------------------------------------------
+-                         CREATE 1 RECIPES
+---------------------------------------------------------------*/
+
 router.post('/', async (req, res) => {
     try {
         const createRecipe = await Recipe.create({
             recipe_name: req.body.recipe_name,
             description: req.body.description,
-            user_id: req.body.user_id,
-            steps: req.body.steps,
-            ingredients: req.body.ingredients,
+            user_id: req.session.user_id,
+            steps: req.body.steps.split(/\r?\n/),
+            ingredients: req.body.ingredients.split(/\r?\n/),
             time: req.body.time,
             servings: req.body.servings,
-            image: req.body.image
+            image: req.body.image || 'https://i.imgur.com/uBf1lrk.png'
         });
         res.status(200).json(createRecipe);
     } catch (err) {
@@ -104,7 +114,9 @@ router.post('/', async (req, res) => {
     }
 });
 
-//update a recipe
+/*---------------------------------------------------------------
+-                         UPDATE 1 RECIPE
+---------------------------------------------------------------*/
 
 router.put('/:id', async (req, res) => {
     try {
@@ -126,12 +138,15 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-// delete a recipe
+/*---------------------------------------------------------------
+-                         DELETE 1 RECIPES
+---------------------------------------------------------------*/
+
 router.delete('/:id', async (req, res) => {
     try {
         const recipeData = await Recipe.destroy({
             where: {
-                recipe_id: req.params.recipe_id
+                id: req.params.id
             }
         });
         if (!recipeData) {

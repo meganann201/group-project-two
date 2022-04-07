@@ -1,8 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const withAuth = require('../../utils/auth');
+const router = require('express').Router();
 
-const { User, Recipe, Comment } = require('../../models');
+const { User } = require('../../models');
 
 /*---------------------------------------------------------------
 -                         GET ALL USERS PROFILES
@@ -10,9 +8,7 @@ const { User, Recipe, Comment } = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
-      const userdata = await User.findAll({
-        attributes: { exclude: ['password'] }
-      });
+      const userdata = await User.findAll();
       res.status(200).json(userdata);
   } catch (err) {
       res.status(500).json(err);
@@ -23,42 +19,17 @@ router.get('/', async (req, res) => {
 -                       GET 1 USER PROFILE
 ---------------------------------------------------------------*/
 
-router.get("/:id", (req, res) => {
-      User.findOne({
-        attributes: {
-          exclude: ["secret_key"]
-        },
-        where: {
-          id: req.params.id,
-        },
-        include: [{
-            model: Recipe,
-            attributes: [
-              "id",
-              "recipe_name",
-              "description",
-              "steps",
-              "ingredients",
-              "time",
-              "servings",
-              "image",
-            ],
-          },
-          {
-            model: Comment,
-            attributes: ["id", "comment", "recipe_id", "user_id", "created_at"],
-            include: {
-              model: Recipe,
-              attributes: ["recipe_name"],
-            },
-          },
-        ],
-      })
-    .then((dbUserData) => res.json(dbUserData))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+router.get('/:id', (req, res) => {
+    User.findOne({
+      where:{
+        id: req.params.id
+      },
+    })
+      .then((dbUserData) => res.json(dbUserData))
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
 });
       
 /*---------------------------------------------------------------
@@ -68,12 +39,13 @@ router.get("/:id", (req, res) => {
 router.put("/:id", (req, res) => {
   User.update(
     {
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
       email: req.body.email,
       user_name: req.body.user_name,
       secret_key: req.body.secret_key,
     },
     {
-    individualHooks: true,
     where: {
       id: req.params.id
     }
@@ -89,7 +61,7 @@ router.put("/:id", (req, res) => {
 -                       DELETE 1 USER PROFILE
 ---------------------------------------------------------------*/
 
-router.delete('/:id', withAuth ,(req, res) => {
+router.delete('/:id', (req, res) => {
   User.destroy({
     where: {
       id: req.params.id
@@ -106,61 +78,65 @@ router.delete('/:id', withAuth ,(req, res) => {
 -                      CREATE USER PROFILE
 ---------------------------------------------------------------*/
 
-router.post('/', (req, res) => {
-  
-  User.create({
-    user_name: req.body.user_name,
-    email: req.body.email,
-    secret_key: req.body.secret_key
-  })
-  .then(dbUserData => {
-    req.session.save(() => {
-      req.session.user_id = dbUserData.id;
-      req.session.user_name = dbUserData.user_name;
-      req.session.loggedIn = true;
-  
-      res.json(dbUserData);
+router.post('/', async (req, res) => {
+
+  try{
+    const newUser = await User.create({
+      
+      user_name: req.body.user_name,
+      email: req.body.email,
+      secret_key: req.body.secret_key
     });
-  })
+    req.session.save(() => {
+      req.session.loggedIn = true;
+      res.status(200).json(newUser);
+    });
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json(err);
+  }
 });
 
-router.post('/login', (req, res) => {
-  User.findOne({
-    where: {
-      email: req.body.email
-    }
-  }).then(dbUserData => {
-    if (!dbUserData) {
-      res.status(400).json({ message: 'No user with that email address!' });
-      return;
-    }
+/*---------------------------------------------------------------
+-                      USER LOGIN
+---------------------------------------------------------------*/
 
-    const validPassword = dbUserData.checkPassword(req.body.secret_key);
+router.post('/login', async (req, res) => {
 
-    if (!validPassword) {
-      res.status(400).json({ message: 'Incorrect password!' });
-      return;
-    }
-
-    req.session.save(() => {
-      // declare session variables
-      req.session.user_id = dbUserData.id;
-      req.session.user_name = dbUserData.user_name;
-      req.session.loggedIn = true;
-
-      res.json({ user: dbUserData, message: 'You are now logged in!' });
+  try{
+    const newLogin = await User.findOne({
+      where: {
+        email: req.body.email
+      },
+      
     });
-  });
+    const validPassword = await newLogin.checkPassword(req.body.secret_key);
+    req.session.save(() => {
+      
+      req.session.loggedIn = true;
+      req.session.user_id = newLogin.id;
+      res.status(200).json(newLogin);
+      
+    });
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json(err);
+  }
 });
+
+/*---------------------------------------------------------------
+-                      USER LOGOUT
+---------------------------------------------------------------*/
 
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  }
-  else {
-    res.status(404).end();
+      req.session.destroy(() => {
+          res.status(204).end();
+      });
+  } else {
+      res.status(404).end();
   }
 });
 
