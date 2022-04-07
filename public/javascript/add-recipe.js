@@ -1,12 +1,15 @@
+document.getElementById('addRecipeForm').addEventListener('submit', recipeFormHandler)
+
 async function recipeFormHandler(event) {
   event.preventDefault();
 
   const recipe_name = document.querySelector('input[name="recipe-name"]').value;
-  const description = document.querySelector('#recipe-description').value;
-  const steps = document.querySelector('#recipe-steps').value;
-  const ingredients = document.querySelector('#recipe-ingredients').value;
-  const time = document.querySelector('#recipe-cook-time').value;
-  const servings = document.querySelector('#recipe-servings').value;
+  const description = document.querySelector('textarea[name="recipe-description"]').value;
+  const steps = document.querySelector('textarea[name="recipe-steps"]').value;
+  const ingredients = document.querySelector('textarea[name="recipe-ingredients"]').value;
+  const time = document.querySelector('input[name="recipe-cook-time"]').value;
+  const servings = document.querySelector('input[name="recipe-servings"]').value;
+  const image = document.querySelector('input[name="recipe-image"]').value;
 
   const response = await fetch('/api/recipes', {
     method: 'POST',

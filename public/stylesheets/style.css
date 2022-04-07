@@ -73,6 +73,8 @@ body {
   transition: all 0.3s ease 0s;
   margin-top: 6px;
   padding: 4px;
+  width: 120px;
+  height: 30px;
 }
 
 
@@ -354,5 +356,7 @@ a {
   transform: scale(1.1);
 }
   
-     
+.dashboard {
+  width: 800px;
+}
      

@@ -101,12 +101,12 @@ router.post('/', async (req, res) => {
         const createRecipe = await Recipe.create({
             recipe_name: req.body.recipe_name,
             description: req.body.description,
-            user_id: req.body.user_id,
-            steps: req.body.steps,
-            ingredients: req.body.ingredients,
+            user_id: req.session.user_id,
+            steps: req.body.steps.split(/\r?\n/),
+            ingredients: req.body.ingredients.split(/\r?\n/),
             time: req.body.time,
             servings: req.body.servings,
-            image: req.body.image
+            image: req.body.image || 'https://i.imgur.com/uBf1lrk.png'
         });
         res.status(200).json(createRecipe);
     } catch (err) {
@@ -146,7 +146,7 @@ router.delete('/:id', async (req, res) => {
     try {
         const recipeData = await Recipe.destroy({
             where: {
-                recipe_id: req.params.recipe_id
+                id: req.params.id
             }
         });
         if (!recipeData) {
