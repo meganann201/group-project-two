@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'GFS Didot', serif;
 }
 
 .thumbnail-image {
@@ -25,16 +25,6 @@ body {
   -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 }
 
-textarea {
-  height: 1em;
-  width: 50%;
-  padding: 3px;
-  transition: all 0.5s ease;
-}
-
-textarea:focus {
-  height: 6em;
-}
 
 .submit-btn {
   float: right;
@@ -84,6 +74,7 @@ textarea:focus {
   margin-top: 6px;
   padding: 4px;
 }
+
 
 a {
   color: #0d1a26;
