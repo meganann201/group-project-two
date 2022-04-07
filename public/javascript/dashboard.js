@@ -1,6 +1,8 @@
 const cloudName = "dlpy4wqdo";
 const uploadPreset = "vja8jfpu";
 
+const recipeURL = "";
+
 var myWidget = cloudinary.createUploadWidget(
     {
         cloudName: cloudName, 
@@ -13,7 +15,7 @@ var myWidget = cloudinary.createUploadWidget(
     (error, result) => { 
         if (!error && result && result.event === "success") { 
         console.log('Done! Here is the image info: ', result.info); 
-        document.getElementById("uploadedimage").setAttribute("src", result.info.secure_url);
+        recipeURL = result.info.secure_url;
         }
     }
 );
