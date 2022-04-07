@@ -70,22 +70,28 @@ router.get('/login', (req, res) => {
 ---------------------------------------------------------------*/
 
 router.get('/dashboard', (req, res) => {
-  Recipe.findAll({
+  User.findAll({
+    attributes: 
+    [
+      "id"
+    ],
     where: {
-      // use the ID from the session
-      user_id: req.session.user_id
+      id: req.session.id
     },
     include: [
       {
-        model: User,
-        attributes: ['user_name'],
+        model: Recipe,
+        attributes: ["id", "recipe_name", "description", "user_id", "image"],
       }
     ]
   })
     .then(dbRecipeData => {
       // serialize data before passing to template
       const recipes = dbRecipeData.map((recipe) => recipe.get({ plain: true }));
-      res.render('dashboard', { recipes });
+      res.render('dashboard', {
+         recipes, 
+         loggedIn: req.session.loggedIn 
+        });
     })
     .catch(err => {
       console.log(err);
