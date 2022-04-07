@@ -21,7 +21,7 @@ const sess = {
 
 app.use(session(sess));
 
-const hbs = exphbs.create({ });
+const hbs = exphbs.create({  });
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -30,13 +30,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(require('./controllers/'));
 
-// we need to do this for each route until they are all done
-// app.use(require('./controllers/api/user-routes.js'));
-
-// when all routes are done we can use this line
-// app.use(require('./controllers/'));
-
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ alter: true }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
