@@ -105,7 +105,8 @@ router.post('/', async (req, res) => {
             steps: req.body.steps,
             ingredients: req.body.ingredients,
             time: req.body.time,
-            servings: req.params.servings
+            servings: req.body.servings,
+            image: req.body.image
         });
         res.status(200).json(createRecipe);
     } catch (err) {

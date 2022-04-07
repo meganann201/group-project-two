@@ -1,14 +1,14 @@
 async function recipeFormHandler(event) {
   event.preventDefault();
 
-  const recipe_name = document.querySelector('#recipe-name');
-  const description = document.querySelector('#recipe-description');
-  const steps = document.querySelector('#recipe-steps');
-  const ingredients = document.querySelector('#recipe-ingredients');
-  const time = document.querySelector('#recipe-cook-time');
-  const servings = document.querySelector('#recipe-servings');
+  const recipe_name = document.querySelector('input[name="recipe-name"]').value;
+  const description = document.querySelector('#recipe-description').value;
+  const steps = document.querySelector('#recipe-steps').value;
+  const ingredients = document.querySelector('#recipe-ingredients').value;
+  const time = document.querySelector('#recipe-cook-time').value;
+  const servings = document.querySelector('#recipe-servings').value;
 
-  const response = await fetch('/recipe', {
+  const response = await fetch('/api/recipes', {
     method: 'POST',
     body: JSON.stringify({
       recipe_name,
@@ -16,7 +16,8 @@ async function recipeFormHandler(event) {
       steps,
       ingredients,
       time,
-      servings
+      servings,
+      image
     }),
     headers: {
       'Content-Type': 'application/json'
