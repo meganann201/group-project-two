@@ -21,8 +21,6 @@ const sess = {
 
 app.use(session(sess));
 
-
-
 const hbs = exphbs.create({  });
 
 app.engine('handlebars', hbs.engine);
@@ -34,6 +32,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(require('./controllers/'));
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ alter: true }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
