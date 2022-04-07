@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
 
+/*---------------------------------------------------------------
+-                     GET ALL RECIPES for specific user
+---------------------------------------------------------------*/
 
-// get all comments from a recipe
 router.get('/', async (req, res) => {
     try {
         const commentData = await Comment.findAll();
@@ -12,8 +14,10 @@ router.get('/', async (req, res) => {
     }
 })
 
+/*---------------------------------------------------------------
+-                         CREATE COMMENT
+---------------------------------------------------------------*/
 
-// create a comment 
 router.post('/', async (req, res) => {
     try {
         const createdComment = await Comment.create({
@@ -27,7 +31,10 @@ router.post('/', async (req, res) => {
     }
 });
 
-// delete a comment
+/*---------------------------------------------------------------
+-                         DELETE COMMENT
+---------------------------------------------------------------*/
+
 router.delete('/:id', async (req, res) => {
     try {
         const commentData = await Comment.destroy({
@@ -46,7 +53,10 @@ router.delete('/:id', async (req, res) => {
 
 });
 
-// edit an existing comment
+/*---------------------------------------------------------------
+-                         EDIT COMMENT
+---------------------------------------------------------------*/
+
 router.patch('/recipe/:id', async (req, res) => {
     try {
         const updatedComment = await Comment.update({
@@ -58,6 +68,6 @@ router.patch('/recipe/:id', async (req, res) => {
         res.status(400).json(err);
     }
 });
-
+ 
 module.exports = router;
 

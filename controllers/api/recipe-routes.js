@@ -1,7 +1,10 @@
 const router = require('express').Router();
 const { Recipe, User, Comment, RecipeCategory, Category } = require('../../models');
 
-// get all recipes
+/*---------------------------------------------------------------
+-                         GET ALL RECIPES
+---------------------------------------------------------------*/
+
 router.get('/', async (req, res) => {
     try {
         const recipeData = await Recipe.findAll({
@@ -38,7 +41,11 @@ router.get('/', async (req, res) => {
     }
 });
 
-// get a single recipe
+
+/*---------------------------------------------------------------
+-                         GET 1 RECIPE
+---------------------------------------------------------------*/
+
 router.get('/:id', async (req, res) => {
     try {
         const recipeData = await Recipe.findOne({
@@ -85,7 +92,10 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// create a recipe
+/*---------------------------------------------------------------
+-                         CREATE 1 RECIPES
+---------------------------------------------------------------*/
+
 router.post('/', async (req, res) => {
     try {
         const createRecipe = await Recipe.create({
@@ -104,7 +114,9 @@ router.post('/', async (req, res) => {
     }
 });
 
-//update a recipe
+/*---------------------------------------------------------------
+-                         UPDATE 1 RECIPE
+---------------------------------------------------------------*/
 
 router.put('/:id', async (req, res) => {
     try {
@@ -126,7 +138,10 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-// delete a recipe
+/*---------------------------------------------------------------
+-                         DELETE 1 RECIPES
+---------------------------------------------------------------*/
+
 router.delete('/:id', async (req, res) => {
     try {
         const recipeData = await Recipe.destroy({
