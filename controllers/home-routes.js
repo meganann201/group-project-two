@@ -109,6 +109,10 @@ router.get('/recipe/:id', (req, res) => {
       // serialize the data
       const recipe = dbRecipeData.get({ plain: true });
 
+      recipe.Comments.forEach(c => {
+        c['canDelete'] = c.user_id === req.session.user_id
+      })
+
       // pass data to template
       res.render("single-recipe", {
         recipe,
@@ -237,7 +241,6 @@ router.get('/category/:category_name', async (req, res) => {
       loggedIn: req.session.loggedIn
     });
   } catch(err) {
-    debugger;
     res.status(500).json(err);
   }
 });
