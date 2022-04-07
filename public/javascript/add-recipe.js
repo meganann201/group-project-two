@@ -1,15 +1,31 @@
-/* async function handleAddRecipe(recipe_id) {
-  const response = await fetch(`/api/favorites/recipe`, {
+async function recipeFormHandler(event) {
+  event.preventDefault();
+
+  const recipe_name = document.querySelector('#recipe-name');
+  const description = document.querySelector('#recipe-description');
+  const steps = document.querySelector('#recipe-steps');
+  const ingredients = document.querySelector('#recipe-ingredients');
+  const time = document.querySelector('#recipe-cook-time');
+  const servings = document.querySelector('#recipe-servings');
+
+  const response = await fetch('/recipe', {
     method: 'POST',
+    body: JSON.stringify({
+      recipe_name,
+      description,
+      steps,
+      ingredients,
+      time,
+      servings
+    }),
     headers: {
       'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({recipe_id})
+    }
   });
   if (response.ok) {
-    document.getElementById('add-favorite-btn').classList.add("d-none");
-    document.getElementById('remove-favorite-btn').classList.remove("d-none");
-  } else {
+    document.location.reload();
+  } 
+  else {
     alert(response.statusText);
   }
-} */
+}

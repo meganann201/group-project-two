@@ -1,24 +1,143 @@
-<section>
+<section class="container">
 
   <h2>Create New Recipe</h2>
 
-  <form class="new-recipe-form">
-    <div>
-      <label for="recipe-name">Title</label>
-      <input type="text" id="recipe-name" name="recipe-name" />
+  <form class="new-recipe-form" method="post">
+            {{!-- RECIPE NAME --}}
+    <div class="form-group row">
+      <label for="recipe-name" class="col-sm-2 col-form-label">Recipe Name</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text"  id="recipe-name" name="recipe-name" placeholder="My Special Plate" />
+      </div>
     </div>
-    <div>
-      <label for="post-url">Link</label>
-      <input id="post-url" name="post-url" />
+            {{!-- RECIPE DESCRIPTION --}}
+    <div class="form-group row">
+      <label for="recipe-description" class="col-sm-2 col-form-label">Description</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" type="text" id="recipe-description" rows="5" name="recipe-description" placeholder="Some Tasty Details"></textarea>
+      </div>
     </div>
-    <button type="submit" class="btn">Create</button>
+            {{!-- RECIPE STEPS --}}
+    <div class="form-group row">
+      <label for="recipe-steps" class="col-sm-2 col-form-label">Steps</label>
+      <div class="col-sm-10">
+        <input type="text" id="recipe-steps" name="recipe-steps" class="form-control" />
+      </div>
+    </div>
+            {{!-- RECIPE INGREDIENTS --}}
+   <div class="container">
+      <label for="recipe-ingredients">Ingredients</label>
+      <input type="text" id="recipe-ingredients" name="recipe-ingredients" />
+    </div>
+            {{!-- RECIPE COOK TIME --}}
+    <div class="container">
+      <label for="recipe-cook-time">Cook Time</label>
+      <input type="number" id="recipe-cook-time" name="recipe-cook-time" placeholder="35 (minutes)" />
+    </div>
+
+            {{!-- RECIPE SERVINGS --}}
+
+    <div class="container">
+      <select class="custom-select custom-select-lg mb-3">
+        <option selected>Serving Size</option>
+        <option value="1">Serves 1</option>
+        <option value="2">Serves 2</option>
+        <option value="3">Serves 3</option>
+        <option value="4">Serves 4</option>
+        <option value="5">Serves 5</option>
+        <option value="6">Serves 6</option>
+      </select>
+    </div>
+
+            {{!-- RECIPE CATEGORIES --}}
+
+    <div class="form-group row container">
+    <div class="col-sm-12">Categories</div>
+
+    <div class="col-sm-2">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+          Breakfast
+        </label>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+          Lunch
+        </label>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+          Dinner
+        </label>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+          Appetizers
+        </label>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+          Desserts
+        </label>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+          Drinks
+        </label>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+          Quick
+        </label>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+          Vegetarian
+        </label>
+      </div>
+    </div>
+
+  </div>
+            {{!-- SUBMIT RECIPE --}}
+  <div>
+    <button type="submit" class="btn btn-primary">Add Recipe</button>
+  </div>
   </form>
 
 </section>
 
 
-<section>
-  <h2>Your Recipes</h2>
+<section class="container">
+  <h2 class="recipe-title">Your Recipes</h2>
   <ol>
     {{#each recipes as |recipe|}}
     <div class="container">
@@ -40,6 +159,7 @@
                     <p> <i class="fa-solid fa-users"></i> Yield</p>
                     <p>Serves {{recipe.servings}} </p>
                 </div>
+              <a href="/dashboard/edit{{recipe.id}}" class="btn-primary">Edit Recipe</a>
             </div>
         </div>
     </div>
