@@ -72,7 +72,6 @@ router.get('/login', (req, res) => {
 router.get('/dashboard', (req, res) => {
   Recipe.findAll({
     where: {
-      // use the ID from the session
       user_id: req.session.user_id
     },
     include: [
@@ -83,7 +82,6 @@ router.get('/dashboard', (req, res) => {
     ]
   })
     .then(dbRecipeData => {
-      // serialize data before passing to template
       const recipes = dbRecipeData.map((recipe) => recipe.get({ plain: true }));
       res.render('dashboard', { recipes });
     })

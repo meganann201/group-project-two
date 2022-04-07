@@ -1,6 +1,6 @@
 <section class="container">
 
-  <h2>Create New Recipe</h2>
+  <h5 class="card-title text-center">Create New Recipe</h5>
 
   <form class="new-recipe-form" method="post">
             {{!-- RECIPE NAME --}}
@@ -61,7 +61,7 @@
 
       <div class="col-sm-2 col-form-label">Categories
       </div>
-
+            
       <div class="col-sm-4 col-form-label">
         <div class="col-sm-2">
 
@@ -136,15 +136,12 @@
           </div>
         </div>
       </div>
+
+              {{!-- SUBMIT RECIPE --}}
       <div class="col-sm-2 col-form-label">
         <button type="submit" class="btn btn-primary">Add Recipe</button>
       </div>
     </div>
-            {{!-- SUBMIT RECIPE --}}
-  {{!-- <div>
-    <button type="submit" class="btn btn-primary">Add Recipe</button>
-  </div> --}}
-
   </form>
 
 </section>
@@ -182,26 +179,6 @@
   </ol>
 </section>
 
-
-
-
-
-
-{{!-- <section>
-  <h2>Your Recipes</h2>
-  <ol>
-    {{#each recipes as |recipe|}}
-    <li>
-      {{ recipe.recipe_name }} <br>
-      {{ recipe.description }} <br>
-      {{ recipe.user_id }} <br>
-      {{ recipe.steps }} <br>
-      {{ recipe.ingredients }} <br>
-      {{ recipe.time }} <br>
-      {{ recipe.image }} <br>
-      <a href="/dashboard/edit{{recipe.id}}" class="edit-link">Edit recipe</a>
-    </li>
-    {{/each}}
-  </ol>
-</section> --}}
-
+<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>  
+<img  id="uploadedimage" src=""></img> 
+<script src="/javascript/dashboard.js" type="text/javascript"></script>
