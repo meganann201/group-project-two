@@ -360,3 +360,30 @@ a {
   width: 800px;
 }
      
+.autocomplete {
+  background: white;
+  z-index: 1000;
+  overflow: auto;
+  box-sizing: border-box;
+  border: 1px solid rgba(50, 50, 50, 0.6);
+}
+
+.autocomplete > div {
+  padding: 0 4px;
+}
+
+.autocomplete .group {
+  background: #eee;
+}
+
+.autocomplete > div {
+  padding: 10px;
+}
+
+.autocomplete > div:hover:not(.group),
+.autocomplete > div.selected {
+  background: #eb4936;
+  color: #fff;
+  cursor: pointer;
+}
+

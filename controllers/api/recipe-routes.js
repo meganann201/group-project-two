@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const sequelize = require('../../config/connection');
 const { Recipe, User, Comment, RecipeCategory, Category } = require('../../models');
 
 /*---------------------------------------------------------------
@@ -158,5 +159,20 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+router.get('/search/:query', async (req, res) => {
+    try {
+        const recipeData = await sequelize.query('SELECT id, recipe_name FROM recipe WHERE LOWER(recipe_name) LIKE LOWER();', {
+            replacements: [`%${req.params.query}%`],
+            model: Recipe,
+            mapToModel: true
+          });
+
+        res.status(200).json(recipeData);
+    } catch (err) {
+       
+        res.status(500).json(err);
+    }
+})
 
 module.exports = router;
