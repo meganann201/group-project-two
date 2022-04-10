@@ -162,7 +162,7 @@ router.delete('/:id', async (req, res) => {
 
 router.get('/search/:query', async (req, res) => {
     try {
-        const recipeData = await sequelize.query('SELECT id, recipe_name FROM recipe WHERE LOWER(recipe_name) LIKE LOWER();', {
+        const recipeData = await sequelize.query('SELECT id, recipe_name FROM recipe WHERE LOWER(recipe_name) LIKE LOWER(?);', {
             replacements: [`%${req.params.query}%`],
             model: Recipe,
             mapToModel: true
