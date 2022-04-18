@@ -7,7 +7,7 @@ La Cocina is an app that allows users to browse recipes. Recipes are sorted into
 
 
 ## Usage
-[Heroku Link](https://fast-everglades-74532.herokuapp.com/recipe/23)
+[Heroku Link](https://fast-everglades-74532.herokuapp.com)
 
 #### Homepage
 ![](https://i.imgur.com/EYzNgUy.png)
